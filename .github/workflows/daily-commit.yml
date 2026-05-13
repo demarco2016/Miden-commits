@@ -2,6 +2,7 @@ name: Daily Auto commit [Miden]
 
 on:
   schedule:
+    - push:
     - cron: '0 10 * * *'
   workflow_dispatch:
 
