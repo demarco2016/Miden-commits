@@ -1,8 +1,7 @@
-name: Daily Auto commit [Miden]
+name: Daily Auto Commit
 
 on:
   schedule:
-    - push:
     - cron: '0 10 * * *'
   workflow_dispatch:
 
@@ -19,7 +18,7 @@ jobs:
         run: |
           cat > daily-log.md << EOF
 # Miden Activity Log
-## $(date '+%Y-%m-%d %H:%M:%S')
+## \
 
 - [x] Daily contribution maintained
 
@@ -35,7 +34,7 @@ EOF
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "Auto commit [Miden] $(date +%Y-%m-%d)"
+            git commit -m "Auto commit Miden \"
             git push
           else
             echo "No changes to commit"
