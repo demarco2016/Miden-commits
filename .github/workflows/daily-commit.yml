@@ -14,11 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Log
-        run: echo "Daily commit " > log.txt
+        run: echo "Daily commit $(date -u)" > log.txt
       - name: Push
         run: |
           git config user.name demarco2016
           git config user.email fouaddemarco13@gmail.com
           git add .
-          git commit -m "daily " || echo "no changes"
+          git commit -m "daily $(date -u)" || echo "no changes"
           git push
