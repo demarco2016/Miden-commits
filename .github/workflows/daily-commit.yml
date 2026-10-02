@@ -1,24 +1,14 @@
-name: Daily Auto Commit
-
+name: Repository checks
 on:
-  schedule:
-    - cron: '0 10 * * *'
+  push:
+  pull_request:
   workflow_dispatch:
-
 permissions:
-  contents: write
-
+  contents: read
 jobs:
-  auto-commit:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Log
-        run: echo "Daily commit $(date -u)" > log.txt
-      - name: Push
-        run: |
-          git config user.name demarco2016
-          git config user.email fouaddemarco13@gmail.com
-          git add .
-          git commit -m "daily $(date -u)" || echo "no changes"
-          git push
+      - name: Check whitespace errors
+        run: git diff-tree --check HEAD
